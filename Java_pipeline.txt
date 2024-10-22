@@ -1,0 +1,36 @@
+pipeline{
+    agent any
+    
+    stages{
+        stage('Checkout'){
+            steps{
+                git branch: 'main', url : 'https://github.com/yogirajbshinde21/Exp-6-DevOps-Java-Pipeline.git'
+            }
+        }
+        
+        stage('Build'){
+            steps{
+                //Compile the java code using windows batch command
+                bat 'javac HelloWorld.java'
+            }
+        }
+        
+        stage('Test and Run'){
+            steps{
+                // Run your java progrqam using windows batch command
+                bat 'java HelloWorld'
+            }
+        }
+    }
+    
+    
+    post{
+        success{
+            echo 'Pipeline succeeded!'
+        }
+        
+        failure{
+            echo 'Pipeline failed!'
+        }
+    }
+}
